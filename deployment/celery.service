@@ -1,0 +1,15 @@
+# deployment/celery.service
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/asvenrollment
+EnvironmentFile=/var/www/asvenrollment/.env
+ExecStart=/var/www/asvenrollment/venv/bin/celery -A celery_worker.celery worker --loglevel=INFO
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
